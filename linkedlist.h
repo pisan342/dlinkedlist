@@ -28,6 +28,7 @@ public:
   int size() const;
   void push_front(int data);
   void push_back(int data);
+  void push_sorted(int data);
   int front() const;
   int back() const;
   void pop_front();

@@ -57,6 +57,39 @@ void LinkedList::push_back(int data) {
   newNode->prev = tail;
   tail = newNode;
 }
+
+// larger items go to front
+void LinkedList::push_sorted(int data) {
+  ++_size;
+  Node *newNode = new Node(data);
+  if (head == nullptr) {
+    head = tail = newNode;
+    return;
+  }
+  // insert front
+  if (data >= head->data) {
+    newNode->next = head;
+    head->prev = newNode;
+    head = newNode;
+    return;
+  }
+  // insert end
+  if (data <= tail->data) {
+    newNode->prev = tail;
+    tail->next = newNode;
+    tail = newNode;
+    return;
+  }
+  Node *curr = head;
+  while (data < curr->data) {
+    curr = curr->next;
+  }
+  newNode->next = curr;
+  newNode->prev = curr->prev;
+  newNode->prev->next = newNode;
+  newNode->next->prev = newNode;
+}
+
 int LinkedList::front() const {
   assert(head != nullptr);
   return head->data;

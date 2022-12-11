@@ -1,3 +1,4 @@
+#include "priority_queue.h"
 #include "queue.h"
 #include "stack.h"
 #include <cassert>
@@ -33,9 +34,24 @@ void testS() {
   cout << "Passed stack tests" << endl;
 }
 
+void testPQ() {
+  Priority_Queue pqueue;
+  assert(pqueue.empty());
+  pqueue.push(10);
+  assert(pqueue.size() == 1);
+  assert(pqueue.top() == 10);
+  pqueue.push(20);
+  pqueue.push(30);
+  pqueue.push(25);
+  assert(pqueue.top() == 30);
+  pqueue.pop();
+  assert(pqueue.top() == 25);
+  cout << "Passed priority_queue tests" << endl;
+}
 int main() {
   testQ();
   testS();
+  testPQ();
   cout << "Done." << endl;
   return 0;
 }
