@@ -5,8 +5,7 @@
 
 using namespace std;
 
-Node::Node(int data, Node *next, Node *prev)
-    : data{data}, next{next}, prev{prev} {}
+Node::Node(int data) : data{data}, next{nullptr}, prev{nullptr} {}
 
 ostream &operator<<(ostream &out, const LinkedList &lst) {
   out << "[";
@@ -37,26 +36,26 @@ int LinkedList::size() const { return _size; }
 
 void LinkedList::push_front(int data) {
   ++_size;
-  Node *n = new Node(data);
+  Node *newNode = new Node(data);
   if (head == nullptr) {
-    head = tail = n;
+    head = tail = newNode;
     return;
   }
-  head->prev = n;
-  n->next = head;
-  head = n;
+  head->prev = newNode;
+  newNode->next = head;
+  head = newNode;
 }
 
 void LinkedList::push_back(int data) {
   ++_size;
-  Node *n = new Node(data);
+  Node *newNode = new Node(data);
   if (tail == nullptr) {
-    head = tail = n;
+    head = tail = newNode;
     return;
   }
-  tail->next = n;
-  n->prev = tail;
-  tail = n;
+  tail->next = newNode;
+  newNode->prev = tail;
+  tail = newNode;
 }
 int LinkedList::front() const {
   assert(head != nullptr);

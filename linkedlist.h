@@ -10,7 +10,7 @@ public:
   int data;
   Node *next;
   Node *prev;
-  explicit Node(int data = 0, Node *next = nullptr, Node *prev = nullptr);
+  explicit Node(int data = 0);
 };
 
 class LinkedList {
