@@ -5,20 +5,21 @@
 
 using namespace std;
 
-class Node {
+template <class T> class Node {
 public:
-  int data;
+  T data;
   Node *next;
   Node *prev;
-  explicit Node(int data = 0);
+  Node(T data);
 };
 
-class LinkedList {
-  friend ostream &operator<<(ostream &out, const LinkedList &lst);
+template <class T> class LinkedList {
+  template <class K>
+  friend ostream &operator<<(ostream &out, const LinkedList<K> &lst);
 
 private:
-  Node *head;
-  Node *tail;
+  Node<T> *head;
+  Node<T> *tail;
   int _size;
 
 public:
@@ -26,13 +27,15 @@ public:
   ~LinkedList();
   bool empty() const;
   int size() const;
-  void push_front(int data);
-  void push_back(int data);
-  void push_sorted(int data);
-  int front() const;
-  int back() const;
+  void push_front(T data);
+  void push_back(T data);
+  void push_sorted(T data);
+  T front() const;
+  T back() const;
   void pop_front();
   void pop_back();
 };
+
+#include "linkedlist.ipp"
 
 #endif

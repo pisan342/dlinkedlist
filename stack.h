@@ -3,16 +3,19 @@
 
 #include "linkedlist.h"
 
-class Stack {
+template <class T> class Stack {
 private:
-  LinkedList _list;
+  LinkedList<T> _list;
 
 public:
   Stack();
-  int top() const;
+  T top() const;
   bool empty() const;
   int size() const;
-  void push(int data);
+  void push(T data);
   void pop();
 };
+
+#include "stack.ipp"
+
 #endif

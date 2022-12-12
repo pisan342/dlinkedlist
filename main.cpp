@@ -7,7 +7,7 @@
 using namespace std;
 
 void testQ() {
-  Queue aqueue;
+  Queue<int> aqueue;
   assert(aqueue.empty());
   aqueue.push(10);
   assert(aqueue.size() == 1);
@@ -21,7 +21,7 @@ void testQ() {
 }
 
 void testS() {
-  Stack astack;
+  Stack<int> astack;
   assert(astack.empty());
   astack.push(10);
   assert(astack.size() == 1);
@@ -35,7 +35,7 @@ void testS() {
 }
 
 void testPQ() {
-  Priority_Queue pqueue;
+  Priority_Queue<int> pqueue;
   assert(pqueue.empty());
   pqueue.push(10);
   assert(pqueue.size() == 1);

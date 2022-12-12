@@ -3,16 +3,19 @@
 
 #include "linkedlist.h"
 
-class Priority_Queue {
+template <class T> class Priority_Queue {
 private:
-  LinkedList _list;
+  LinkedList<T> _list;
 
 public:
   Priority_Queue();
-  int top() const;
+  T top() const;
   bool empty() const;
   int size() const;
-  void push(int data);
+  void push(T data);
   void pop();
 };
+
+#include "priority_queue.ipp"
+
 #endif

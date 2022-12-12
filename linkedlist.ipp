@@ -1,17 +1,16 @@
-#include "linkedlist.h"
-
 #include <cassert>
 #include <iostream>
 
 using namespace std;
 
-Node::Node(int data) : data{data}, next{nullptr}, prev{nullptr} {}
+template <class T>
+Node<T>::Node(T data) : data{data}, next{nullptr}, prev{nullptr} {}
 
-ostream &operator<<(ostream &out, const LinkedList &lst) {
+template <class T> ostream &operator<<(ostream &out, const LinkedList<T> &lst) {
   out << "[";
   if (lst.head != nullptr) {
     out << lst.head->data;
-    Node *curr = lst.head->next;
+    auto *curr = lst.head->next;
     while (curr != nullptr) {
       out << ", " << curr->data;
       curr = curr->next;
@@ -20,23 +19,25 @@ ostream &operator<<(ostream &out, const LinkedList &lst) {
   return out << "]";
 }
 
-LinkedList::LinkedList() : head{nullptr}, tail{nullptr}, _size{0} {}
+template <class T>
+LinkedList<T>::LinkedList() : head{nullptr}, tail{nullptr}, _size{0} {}
 
-LinkedList::~LinkedList() {
-  Node *curr = head;
+template <class T> LinkedList<T>::~LinkedList() {
+  auto *curr = head;
   while (curr != nullptr) {
-    Node *todelete = curr;
+    auto *todelete = curr;
     curr = curr->next;
     delete todelete;
   }
 }
 
-bool LinkedList::empty() const { return _size == 0; }
-int LinkedList::size() const { return _size; }
+template <class T> bool LinkedList<T>::empty() const { return _size == 0; }
 
-void LinkedList::push_front(int data) {
+template <class T> int LinkedList<T>::size() const { return _size; }
+
+template <class T> void LinkedList<T>::push_front(T data) {
   ++_size;
-  Node *newNode = new Node(data);
+  auto *newNode = new Node<T>(data);
   if (head == nullptr) {
     head = tail = newNode;
     return;
@@ -46,9 +47,9 @@ void LinkedList::push_front(int data) {
   head = newNode;
 }
 
-void LinkedList::push_back(int data) {
+template <class T> void LinkedList<T>::push_back(T data) {
   ++_size;
-  Node *newNode = new Node(data);
+  auto *newNode = new Node<T>(data);
   if (tail == nullptr) {
     head = tail = newNode;
     return;
@@ -59,9 +60,9 @@ void LinkedList::push_back(int data) {
 }
 
 // larger items go to front
-void LinkedList::push_sorted(int data) {
+template <class T> void LinkedList<T>::push_sorted(T data) {
   ++_size;
-  Node *newNode = new Node(data);
+  auto *newNode = new Node<T>(data);
   if (head == nullptr) {
     head = tail = newNode;
     return;
@@ -80,7 +81,7 @@ void LinkedList::push_sorted(int data) {
     tail = newNode;
     return;
   }
-  Node *curr = head;
+  Node<T> *curr = head;
   while (data < curr->data) {
     curr = curr->next;
   }
@@ -90,18 +91,18 @@ void LinkedList::push_sorted(int data) {
   newNode->next->prev = newNode;
 }
 
-int LinkedList::front() const {
+template <class T> T LinkedList<T>::front() const {
   assert(head != nullptr);
   return head->data;
 }
-int LinkedList::back() const {
+template <class T> T LinkedList<T>::back() const {
   assert(tail != nullptr);
   return tail->data;
 }
-void LinkedList::pop_front() {
+template <class T> void LinkedList<T>::pop_front() {
   assert(head != nullptr);
   --_size;
-  Node *todelete = head;
+  auto *todelete = head;
   if (head == tail) {
     head = tail = nullptr;
     delete todelete;
@@ -112,10 +113,10 @@ void LinkedList::pop_front() {
   delete todelete;
 }
 
-void LinkedList::pop_back() {
+template <class T> void LinkedList<T>::pop_back() {
   assert(tail != nullptr);
   --_size;
-  Node *todelete = tail;
+  auto *todelete = tail;
   if (head == tail) {
     head = tail = nullptr;
     delete todelete;

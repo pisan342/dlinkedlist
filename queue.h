@@ -3,17 +3,20 @@
 
 #include "linkedlist.h"
 
-class Queue {
+template <class T> class Queue {
 private:
-  LinkedList _list;
+  LinkedList<T> _list;
 
 public:
   Queue();
-  int front() const;
-  int back() const;
+  T front() const;
+  T back() const;
   bool empty() const;
   int size() const;
-  void push(int data);
+  void push(T data);
   void pop();
 };
+
+#include "queue.ipp"
+
 #endif
